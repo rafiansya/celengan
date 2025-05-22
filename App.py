@@ -1,22 +1,16 @@
 import streamlit as st
-from PIL import Image
-import os
 
-st.title("Anime Viewer")
+st.title("Anime Viewer dari Link")
 
-# Path folder anime (pastikan sesuai dengan struktur repo kamu)
-anime_folder = "anime"
+# Daftar gambar anime dari link internet
+anime_links = {
+    "Naruto": "https://media.tenor.com/3tXTApJ-BQ0AAAAC/naruto-running.gif",
+    "Luffy": "https://media.tenor.com/1hyOpKwJMPgAAAAC/one-piece-luffy.gif",
+    "Mikasa": "https://media.tenor.com/6Zw35aMFO3QAAAAC/mikasa-ackerman-attack-on-titan.gif"
+}
 
-# Ambil semua file gambar/gif di folder anime
-anime_files = [f for f in os.listdir(anime_folder) if f.endswith(('.png', '.jpg', '.jpeg', '.gif'))]
+# Dropdown untuk pilih anime
+selected = st.selectbox("Pilih anime:", list(anime_links.keys()))
 
-# Dropdown untuk memilih anime
-selected = st.selectbox("Pilih anime:", anime_files)
-
-# Tampilkan anime
-file_path = os.path.join(anime_folder, selected)
-if selected.endswith('.gif'):
-    st.image(file_path, caption=selected)
-else:
-    img = Image.open(file_path)
-    st.image(img, caption=selected)
+# Tampilkan gambar dari link
+st.image(anime_links[selected], caption=selected)
